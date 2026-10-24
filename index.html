@@ -1,259 +1,85 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#173d73">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="四级陪练">
-<title>CET-4 每日陪练</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f8f4e9"><title>四级智能备考 · V1.4 原型</title>
 <style>
-:root{--blue:#173d73;--blue2:#2c5f9d;--bg:#f3f6fb;--ink:#17263c;--muted:#68778d;--line:#e0e7f0;--green:#16845b;--card:#fff}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",Arial,sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-header{background:linear-gradient(135deg,var(--blue),#2d5e98);color:#fff;padding:22px 18px 20px;border-radius:0 0 24px 24px}
-.kicker{font-size:12px;opacity:.8;letter-spacing:.08em}.headrow{display:flex;align-items:center;justify-content:space-between;gap:12px}h1{font-size:24px;margin:7px 0 4px}.sub{font-size:13px;opacity:.85}.pill{border:1px solid #ffffff70;padding:7px 10px;border-radius:99px;font-size:12px;white-space:nowrap}
-main{max-width:760px;margin:auto;padding:14px 14px 28px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:-2px}.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:15px;box-shadow:0 3px 12px #1b3b6410}.label{color:var(--muted);font-size:12px}.big{font-size:25px;font-weight:750;margin:5px 0}.small{font-size:12px;color:var(--muted)}.progress{height:8px;border-radius:99px;background:#e8edf4;overflow:hidden;margin-top:10px}.bar{height:100%;background:var(--green);width:0%;transition:width .2s}
-.sectiontitle{font-size:17px;font-weight:750;margin:21px 2px 10px}.card{margin-bottom:10px}.tasktop{display:flex;gap:11px;align-items:flex-start}.check{appearance:none;width:23px;height:23px;border:2px solid #aab8ca;border-radius:7px;flex:0 0 23px;margin:1px 0 0;cursor:pointer}.check:checked{background:var(--green);border-color:var(--green)}.check:checked:after{content:"✓";color:#fff;display:block;text-align:center;font-weight:800;line-height:19px}.taskname{font-weight:750;font-size:15px}.duration{margin-left:auto;background:#edf3fa;color:var(--blue);font-size:12px;border-radius:7px;padding:4px 7px;white-space:nowrap}.detail{font-size:13px;color:#4e5d72;line-height:1.6;margin:8px 0 0 34px}.links{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0 34px}.links a,.btn{font-size:12px;text-decoration:none;border:1px solid #d4dfed;border-radius:9px;padding:8px 10px;color:var(--blue);background:#f8fbff}.meta{font-size:12px;color:var(--muted);line-height:1.55}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.btn{cursor:pointer;font-size:13px}.primary{background:var(--blue);color:#fff;border-color:var(--blue)}textarea{width:100%;min-height:88px;border:1px solid var(--line);border-radius:12px;padding:11px;font:14px inherit;resize:vertical;background:#fbfcfe;color:var(--ink)}.fieldlabel{display:block;font-size:13px;font-weight:700;margin:10px 0 6px}.foot{font-size:11px;color:var(--muted);line-height:1.6;padding:10px 3px}.notice{background:#fff8e7;border:1px solid #f0dfa9;color:#715522;padding:11px 12px;border-radius:12px;font-size:12px;line-height:1.6;margin-top:12px}.hidden{display:none}@media(min-width:620px){main{padding-left:22px;padding-right:22px}.tasksgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tasksgrid .card{margin-bottom:0}}
+:root{--bg:#f8f5ed;--paper:#fffdf8;--ink:#30372f;--muted:#777b70;--line:#e9e3d6;--sage:#91a78b;--sage-dark:#536d54;--pink:#f0d9d4;--oat:#e9dfc9;--yellow:#f2e7b9;--shadow:0 8px 28px #554b3010;--radius:20px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:1180px;margin:auto;padding:22px 20px 60px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:16px;background:var(--sage);display:grid;place-items:center;font-size:23px}.eyebrow{font-size:11px;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}.brand h1{font-size:21px;margin:3px 0}.goal{background:var(--paper);border:1px solid var(--line);padding:10px 14px;border-radius:999px;font-size:13px;color:var(--sage-dark)}.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:20px}.sidebar{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:12px;height:max-content;position:sticky;top:14px}.nav{width:100%;display:flex;align-items:center;gap:10px;padding:12px;border:0;background:transparent;border-radius:13px;text-align:left;color:var(--muted);margin:2px 0}.nav.active,.nav:hover{background:#edf1e8;color:var(--sage-dark)}.nav .ico{width:24px;text-align:center}.side-note{margin:16px 7px 5px;padding:12px;background:#f7f0e1;border-radius:14px;color:#766a4c;font-size:12px;line-height:1.6}.main{min-width:0}.page{display:none}.page.active{display:block}.welcome{display:flex;justify-content:space-between;gap:18px;align-items:center;background:var(--sage-dark);color:#fffdf8;padding:25px;border-radius:24px;margin-bottom:16px;overflow:hidden;position:relative}.welcome:after{content:'✿';font-size:125px;position:absolute;right:22px;bottom:-34px;opacity:.13}.welcome h2{font-size:25px;margin:5px 0 8px}.welcome p{margin:0;color:#e3eadf;font-size:13px;line-height:1.6}.welcome .date{font-size:12px;color:#d4dfcf}.btn{border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:9px 13px;color:var(--ink);font-size:13px}.btn.primary{background:var(--sage-dark);border-color:var(--sage-dark);color:white}.btn.soft{background:#edf1e8;border-color:#edf1e8;color:var(--sage-dark)}.btn.danger{color:#9b4d45}.btn.small{padding:6px 9px;font-size:12px}.progress-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}.panel,.metric{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:17px;box-shadow:var(--shadow)}.metric-top{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}.metric-value{font-size:23px;font-weight:750;margin:9px 0 4px}.track{height:9px;background:#eee9de;border-radius:99px;overflow:hidden;margin-top:12px}.fill{height:100%;width:0;border-radius:99px;background:var(--sage);transition:width .25s}.fill.pink{background:#d9a9a0}.fill.oat{background:#d7bd7d}.fill.green{background:#719474}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:22px 2px 11px}.section-head h3{font-size:17px;margin:0}.subtext{font-size:12px;color:var(--muted);line-height:1.6}.tasks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.task{padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:18px}.task-head{display:flex;align-items:flex-start;gap:10px}.task-check{width:20px;height:20px;accent-color:var(--sage-dark);margin-top:2px}.task h4{font-size:14px;margin:0 0 5px}.task p{font-size:12px;line-height:1.65;color:var(--muted);margin:8px 0}.tag{font-size:11px;border-radius:99px;padding:5px 8px;background:#f1ecdf;color:#746b56;display:inline-block}.tag.sage{background:#eaf0e6;color:var(--sage-dark)}.tag.pink{background:#f7e9e6;color:#9b655d}.task-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px}.module-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.module{border:1px solid var(--line);background:var(--paper);border-radius:17px;padding:16px 10px;text-align:center;color:var(--ink)}.module:hover{background:#edf1e8}.module .m-ico{font-size:24px}.module strong{display:block;font-size:13px;margin:8px 0 4px}.garden{background:linear-gradient(135deg,#f2ead7,#e9eee2);border-radius:20px;padding:18px;display:flex;align-items:center;gap:14px}.garden-art{font-size:36px}.garden h4{margin:0 0 5px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}.panel h3{margin:0 0 7px;font-size:16px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin:12px 0}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;color:#5e665b}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:12px;background:#fffefa;padding:10px 11px;color:var(--ink);outline-color:var(--sage)}.field textarea{min-height:90px;resize:vertical}.chips{display:flex;flex-wrap:wrap;gap:7px}.chip{border:1px solid var(--line);background:#fffefa;border-radius:99px;padding:6px 10px;font-size:12px;color:var(--muted)}.chip.active{background:#eaf0e6;color:var(--sage-dark);border-color:#d4e0ce}.word-list,.mistake-list{display:grid;gap:9px}.word,.mistake{display:flex;align-items:flex-start;gap:12px;padding:13px;background:#fffefa;border:1px solid var(--line);border-radius:14px}.word-main{flex:1;min-width:0}.word strong{font-size:15px}.word small{display:block;color:var(--muted);font-size:12px;margin-top:4px}.word-actions{display:flex;gap:5px}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:11px;color:var(--muted);font-weight:700}.status{display:inline-block;padding:4px 8px;border-radius:99px;background:#f2ecdf;font-size:11px;color:#786d52}.status.done{background:#eaf0e6;color:var(--sage-dark)}.empty{padding:22px;text-align:center;color:var(--muted);font-size:13px;border:1px dashed var(--line);border-radius:14px}.report-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.report-number{font-size:24px;font-weight:750;margin:7px 0}.divider{height:1px;background:var(--line);margin:15px 0}.notice{padding:12px 14px;background:#f8f0dc;color:#786b4d;border-radius:13px;font-size:12px;line-height:1.65;margin:12px 0}.muted{color:var(--muted)}.footer{font-size:11px;color:var(--muted);line-height:1.7;margin-top:20px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#30372f;color:white;border-radius:99px;padding:11px 17px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:10}.toast.show{opacity:1}.hidden{display:none!important}input[type=number]{max-width:130px}@media(max-width:800px){.layout{grid-template-columns:1fr}.sidebar{position:static;display:flex;overflow:auto;gap:3px;padding:7px}.nav{white-space:nowrap;width:auto;margin:0;padding:10px}.side-note{display:none}.progress-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.module-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.app{padding:14px 12px 40px}}@media(max-width:520px){.top{align-items:flex-start}.goal{font-size:11px;padding:8px}.brand h1{font-size:17px}.welcome{padding:19px}.welcome h2{font-size:21px}.tasks,.two-col{grid-template-columns:1fr}.module-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.form-row,.report-cards{grid-template-columns:1fr}.metric{padding:13px}.metric-value{font-size:21px}}
 </style>
 </head>
-<body>
-<header>
-  <div class="kicker">YOUR PERSONAL CET-4 COACH</div>
-  <div class="headrow"><div><h1>四级每日陪练</h1><div class="sub">目标 425+ · 词汇 / 听力 / 阅读 / 写作翻译</div></div><div class="pill" id="dayPill">Day 1</div></div>
-</header>
-<main>
-  <div class="stats">
-    <div class="stat"><div class="label">今日完成</div><div class="big"><span id="doneCount">0</span><span style="font-size:14px;color:var(--muted)"> / 5 项</span></div><div class="progress"><div class="bar" id="progressBar"></div></div></div>
-    <div class="stat"><div class="label">今日学习目标</div><div class="big">150 <span style="font-size:14px">分钟</span></div><div class="small" id="dateText">今日任务</div></div>
-  </div>
-  <div class="notice"><b>使用提示：</b>每天打开此页面会按日期更新当天任务。打卡和复盘记录保存在这台设备的浏览器中；清除网站数据或换设备可能会丢失。</div>
-  <div class="sectiontitle">今日任务清单</div>
-  <div class="tasksgrid" id="tasks"></div>
-  <div class="sectiontitle">免费资料入口</div>
-  <div class="card">
-    <div class="taskname">① 四级历年真题、答案与部分听力音频</div>
-    <p class="meta">优先选择答案、原文和音频齐全的套卷。练习前先确认文件能打开，不确定题号时不要猜。</p>
-    <div class="links"><a href="https://github.com/0609x/CET46-Resources" target="_blank" rel="noopener">打开真题仓库 ↗</a></div>
-  </div>
-  <div class="card">
-    <div class="taskname">② 四级高频词汇 PDF</div>
-    <p class="meta">每天学约 25 个新词，配合间隔复习；优先掌握真题中反复出现的词和搭配。</p>
-    <div class="links"><a href="https://github.com/liut969/CET" target="_blank" rel="noopener">打开高频词汇 ↗</a></div>
-  </div>
-  <div class="card">
-    <div class="taskname">③ 官方考试信息</div>
-    <p class="meta">考试安排、题型等信息以中国教育考试网及学校通知为准。</p>
-    <div class="links"><a href="https://cet.neea.edu.cn/" target="_blank" rel="noopener">中国教育考试网 ↗</a></div>
-  </div>
-  <div class="sectiontitle">每日复盘</div>
-  <div class="card">
-    <label class="fieldlabel" for="listening">听力：正确题数 / 总题数，最主要的漏听原因</label><textarea id="listening" placeholder="例：6/10；有些词认识但听不出来……"></textarea>
-    <label class="fieldlabel" for="reading">阅读：正确题数 / 总题数，用时和错因</label><textarea id="reading" placeholder="例：4/5；耗时 12 分钟；两题是同义替换没认出……"></textarea>
-    <label class="fieldlabel" for="words">词汇：今天掌握了什么，哪些仍不熟</label><textarea id="words" placeholder="例：25 个新词中 18 个能回忆……"></textarea>
-    <label class="fieldlabel" for="notes">给陪练的备注 / 明天想重点练什么</label><textarea id="notes" placeholder="写下卡住的问题；回到 ChatGPT 对话中粘贴复盘内容，让我调整明日计划。"></textarea>
-    <div class="row" style="margin-top:12px;flex-wrap:wrap"><button class="btn" id="saveBtn">保存今日记录</button><button class="btn" id="copyBtn">复制复盘内容</button><button class="btn" id="resetBtn">重置今日打卡</button></div>
-    <p class="meta" id="saveStatus" aria-live="polite"></p>
-  </div>
-  <div class="sectiontitle">自动更新说明</div>
-  <div class="card meta">
-    <p><b>会自动更新：</b>页面按设备本地日期显示日期和 Day 编号；任务内容会按备考阶段轮换（基础诊断、听力阅读强化、写作翻译、模拟与考前复习）。</p>
-    <p><b>不会自动同步：</b>本页面不会直接读取 ChatGPT 对话，也不会把你在聊天中收到的新计划自动同步到这里。打卡和记录只保存在当前设备浏览器。</p>
-    <p><b>考试日期提醒：</b>计划阶段按 2026 年 12 月 12 日作为目标日期设置；请以官方和学校最新通知为准。</p>
-  </div>
-  <div class="foot">建议：将页面部署到 HTTPS 静态网站后，在 iPhone/iPad 的 Safari 中打开 → 分享 → 添加到主屏幕。此文件本身不会自动变成原生 iOS 小组件，也不能在未部署时从本地文件保证主屏幕持续刷新。</div>
-</main>
+<body><div class="app">
+<header class="top"><div class="brand"><div class="logo">🌱</div><div><div class="eyebrow">CET-4 SMART PREP · PROTOTYPE</div><h1>四级智能备考</h1></div></div><div class="goal">🎯 2026 年 12 月 · 目标 425+</div></header>
+<div class="layout">
+<aside class="sidebar" aria-label="主导航">
+<button class="nav active" data-page="home"><span class="ico">⌂</span>首页</button><button class="nav" data-page="listening"><span class="ico">♫</span>听力</button><button class="nav" data-page="reading"><span class="ico">▤</span>阅读</button><button class="nav" data-page="writing"><span class="ico">✎</span>写作</button><button class="nav" data-page="translation"><span class="ico">文</span>翻译</button><button class="nav" data-page="vocabulary"><span class="ico">✿</span>词汇</button><button class="nav" data-page="mistakes"><span class="ico">↻</span>错题中心</button><button class="nav" data-page="reports"><span class="ico">▥</span>学习报告</button><button class="nav" data-page="data"><span class="ico">⬇</span>数据与备份</button>
+<div class="side-note">小步积累，也是一种进步。<br>先完成今天最重要的一件事。</div>
+</aside>
+<main class="main">
+<section class="page active" id="page-home">
+<div class="welcome"><div><div class="date" id="todayDate"></div><h2>今天，也向 425+ 靠近一点。</h2><p>自动安排五大模块 · 优先补弱项 · 复习不积压</p></div><button class="btn" id="editTimeBtn">调整今日时间</button></div>
+<div class="progress-grid">
+<div class="metric"><div class="metric-top"><span>今日任务完成</span><span>✓</span></div><div class="metric-value" id="homeTaskValue">0/5</div><div class="subtext">按实际打卡计算</div><div class="track"><div class="fill green" id="homeTaskBar"></div></div></div>
+<div class="metric"><div class="metric-top"><span>实际专注时长</span><span>◷</span></div><div class="metric-value"><span id="homeTimeValue">0</span><small style="font-size:12px"> 分钟</small></div><div class="subtext">仅统计手动记录时长</div><div class="track"><div class="fill oat" id="homeTimeBar"></div></div></div>
+<div class="metric"><div class="metric-top"><span>词汇复习进度</span><span>✿</span></div><div class="metric-value" id="homeVocabValue">0/0</div><div class="subtext">今日到期词汇</div><div class="track"><div class="fill pink" id="homeVocabBar"></div></div></div>
+<div class="metric"><div class="metric-top"><span>四级目标</span><span>◎</span></div><div class="metric-value">342 <small style="font-size:12px">/ 425</small></div><div class="subtext">当前参考成绩，不是预测</div><div class="track"><div class="fill" style="width:80.5%"></div></div></div>
+</div>
+<div class="section-head"><h3>今日任务清单</h3><span class="tag sage" id="availableTimeTag">可用时间：120 分钟</span></div><div class="tasks" id="homeTasks"></div>
+<div class="section-head"><h3>五大专项</h3><span class="subtext">点开进入对应页面</span></div><div class="module-grid">
+<button class="module" data-go="listening"><span class="m-ico">🎧</span><strong>听力</strong><span class="subtext">精听 · 重听</span></button><button class="module" data-go="reading"><span class="m-ico">📖</span><strong>阅读</strong><span class="subtext">定位 · 限时</span></button><button class="module" data-go="writing"><span class="m-ico">✍️</span><strong>写作</strong><span class="subtext">草稿 · 修改</span></button><button class="module" data-go="translation"><span class="m-ico">🌏</span><strong>翻译</strong><span class="subtext">对照 · 纠错</span></button><button class="module" data-go="vocabulary"><span class="m-ico">🌼</span><strong>词汇</strong><span class="subtext">新词 · 复习</span></button></div>
+<div class="section-head"><h3>成长花园</h3><span class="subtext">温柔记录每一点进步</span></div><div class="garden"><div class="garden-art" id="gardenArt">🌱</div><div><h4 id="gardenTitle">种下今天的第一颗种子</h4><div class="subtext" id="gardenText">完成任务后，花园会慢慢长大。这里不比较速度，只记录你的坚持。</div></div></div>
+<div class="notice">数据保存在当前浏览器本地。墨墨 API 尚未连接，请手动录入词汇。真题来源请按你实际使用的试卷填写，页面不会伪造年份、套别、音频或答案。</div>
+</section>
+<section class="page" id="page-listening"><div class="section-head"><h3>🎧 听力训练</h3><span class="tag">音频来源待选</span></div><div class="two-col"><div class="panel"><h3>训练记录</h3><p class="subtext">优先选择来源可核实、答案与音频齐全的真题。此原型不内置或伪造真题、答案及音频。</p><div class="field"><label>题型</label><select id="listenType"><option>短篇新闻</option><option>长对话</option><option>听力篇章</option><option>综合复听</option></select></div><div class="form-row"><div class="field"><label>正确题数</label><input id="listenCorrect" type="number" min="0" placeholder="例如 6"></div><div class="field"><label>总题数</label><input id="listenTotal" type="number" min="1" placeholder="例如 10"></div></div><div class="form-row"><div class="field"><label>用时（分钟）</label><input id="listenMinutes" type="number" min="0" placeholder="例如 18"></div><div class="field"><label>重听次数</label><input id="listenReplay" type="number" min="0" placeholder="例如 3"></div></div><div class="field"><label>错因（可多选）</label><div class="chips" data-tags="listenTags"><button class="chip">词汇不熟</button><button class="chip">语速过快</button><button class="chip">连读弱读</button><button class="chip">听懂选错</button><button class="chip">记忆不牢</button></div></div><div class="field"><label>真题来源/备注</label><input id="listenSource" placeholder="填写年份、套卷或来源链接；不确定请注明待核实"></div><button class="btn primary" id="saveListen">保存听力记录</button></div><div class="panel"><h3>听力原则</h3><ul class="subtext" style="line-height:1.9;padding-left:19px"><li>第一遍独立作答，再核对答案。</li><li>挑出 3 句漏听句，逐句对照原文。</li><li>记录词汇、语速、连读或选项判断问题。</li><li>答案来源不可靠时不计算正确率。</li></ul><div class="divider"></div><p class="subtext">可参考真题资料入口：</p><a href="https://github.com/0609x/CET46-Resources" target="_blank" rel="noopener">第三方 CET4/CET6 资料仓库 ↗</a><p class="subtext">第三方资源的完整性、真题出处和授权情况需要自行核实。</p></div></div><div class="section-head"><h3>最近记录</h3></div><div class="panel" id="listenHistory"></div></section>
+<section class="page" id="page-reading"><div class="section-head"><h3>📖 阅读训练</h3><span class="tag">计时可超时完成</span></div><div class="two-col"><div class="panel"><h3>阅读记录</h3><div class="field"><label>题型</label><select id="readType"><option>仔细阅读</option><option>长篇匹配</option><option>选词填空</option></select></div><div class="form-row"><div class="field"><label>正确题数</label><input id="readCorrect" type="number" min="0" placeholder="例如 4"></div><div class="field"><label>总题数</label><input id="readTotal" type="number" min="1" placeholder="例如 5"></div></div><div class="field"><label>用时（分钟）</label><input id="readMinutes" type="number" min="0" placeholder="例如 14"></div><div class="field"><label>错因（可多选）</label><div class="chips" data-tags="readTags"><button class="chip">词汇不熟</button><button class="chip">长难句</button><button class="chip">定位证据</button><button class="chip">同义替换</button><button class="chip">干扰项</button><button class="chip">推理错误</button></div></div><div class="field"><label>真题来源/备注</label><input id="readSource" placeholder="来源链接或套卷信息"></div><button class="btn primary" id="saveRead">保存阅读记录</button></div><div class="panel"><h3>阅读复盘建议</h3><p class="subtext">错题要回到原文定位证据，标记题干与原文的同义替换；不要只记答案字母。记录的正确率只依据你填写的数据。</p><div class="notice">题目、答案和解析请使用可核实来源。没有可靠答案键时，只保存练习记录，不生成准确率。</div></div></div><div class="section-head"><h3>最近记录</h3></div><div class="panel" id="readHistory"></div></section>
+<section class="page" id="page-writing"><div class="section-head"><h3>✍️ 写作工作台</h3><span class="tag">建议计时 30 分钟</span></div><div class="panel"><div class="field"><label>题目 / 题目来源</label><input id="writePrompt" placeholder="写下作文题目；模拟题请标注模拟题"></div><div class="field"><label>原稿</label><textarea id="writeDraft" style="min-height:180px" placeholder="在这里写作，或粘贴外部文档。提交前保留原稿。"></textarea></div><div class="row"><span class="subtext" id="wordCount">0 words</span><div class="row"><button class="btn" id="saveDraft">保存草稿</button><button class="btn primary" id="submitDraft">保存为一次写作记录</button></div></div><div class="field"><label>修改建议 / 复盘</label><textarea id="writeFeedback" placeholder="提交后把 ChatGPT 给你的逐句修改、语法问题和改进目标粘贴在这里；原型不会自动调用 AI。"></textarea></div><div class="notice">此页面不自动评分、不自动生成范文。后续可把原稿发给 ChatGPT 获取逐句修改；AI 评价不是官方分数。</div></div><div class="section-head"><h3>历史草稿与记录</h3></div><div class="panel" id="writeHistory"></div></section>
+<section class="page" id="page-translation"><div class="section-head"><h3>🌏 翻译工作台</h3><span class="tag">允许超时</span></div><div class="panel"><div class="field"><label>原文 / 来源</label><textarea id="transSource" placeholder="粘贴中文原文，并注明真题来源或参考练习。"></textarea></div><div class="field"><label>我的译文</label><textarea id="transDraft" placeholder="输入英文译文……" style="min-height:140px"></textarea></div><div class="field"><label>复盘与修改稿</label><textarea id="transFeedback" placeholder="可在 ChatGPT 分析后粘贴漏译、误译、搭配和语法建议。"></textarea></div><button class="btn primary" id="saveTrans">保存翻译记录</button><div class="notice">原型不会自动生成标准答案。提交后可把原文和译文发给 ChatGPT 分析；存在多种合理译法时不强行认定唯一答案。</div></div><div class="section-head"><h3>历史记录</h3></div><div class="panel" id="transHistory"></div></section>
+<section class="page" id="page-vocabulary"><div class="section-head"><h3>🌼 词汇与墨墨每日记录</h3><span class="tag sage">手动提交 · API 未连接</span></div><div class="notice">最简单的流程：每天把墨墨中当天新背和复习的单词复制到这里，或直接发给 ChatGPT。可记录掌握状态、复习结果和来源；这里不会自动读取墨墨账号。</div><div class="two-col"><div class="panel"><h3>添加今日词汇</h3><div class="field"><label>单词</label><input id="wordTerm" placeholder="例如: maintain"></div><div class="form-row"><div class="field"><label>词性</label><input id="wordPos" placeholder="例如: v."></div><div class="field"><label>中文释义</label><input id="wordMeaning" placeholder="例如: 维持；保持"></div></div><div class="field"><label>类型</label><div class="chips" data-tags="wordKind"><button class="chip active">今日新学</button><button class="chip">今日复习</button><button class="chip">个人错词</button></div></div><div class="field"><label>掌握状态</label><select id="wordStatus"><option value="unknown">待巩固</option><option value="learning">复习中</option><option value="known">暂时掌握</option></select></div><div class="field"><label>搭配 / 例句 / 备注（可选）</label><textarea id="wordNote" placeholder="保留墨墨提供的内容或你自己的记忆提示"></textarea></div><button class="btn primary" id="addWord">保存词汇</button></div><div class="panel"><h3>批量粘贴词表</h3><p class="subtext">每行一个词，推荐格式：单词 | 词性 | 中文释义 | 新学/复习/错词。原始文本会保留，无法识别的字段可以之后编辑。</p><div class="field"><label>词表内容</label><textarea id="bulkWords" style="min-height:155px" placeholder="maintain | v. | 维持；保持 | 新学&#10;approach | n./v. | 方法；接近 | 复习"></textarea></div><button class="btn" id="importWordsText">导入文本词表</button><div class="divider"></div><h3>今日复习</h3><p class="subtext" id="dueWordSummary">当前还没有词汇记录。</p></div></div><div class="section-head"><h3>🎯 词汇互动小测</h3><span class="subtext">根据你录入的中文释义出题，答完立即反馈</span></div><div class="panel" id="vocabQuizPanel"><div class="subtext" id="quizStatus">先添加至少 2 个带中文释义的词汇，再开始测验。</div><div id="quizQuestion" style="font-size:22px;font-weight:750;margin:12px 0"></div><div id="quizOptions" class="chips"></div><div id="quizFeedback" class="notice hidden" role="status"></div><div class="row" style="margin-top:12px"><button class="btn primary" id="startQuiz">开始 / 重新开始</button><button class="btn" id="nextQuiz" disabled>下一题</button></div><div class="subtext" id="quizScore" style="margin-top:10px">本轮得分：0 / 0</div></div><div class="section-head"><h3>词汇库 <span class="subtext" id="wordCountLabel"></span></h3><div class="row"><input id="wordSearch" placeholder="搜索单词或释义" style="width:180px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fffefa"><select id="wordFilter" style="padding:8px;border:1px solid var(--line);border-radius:10px;background:#fffefa"><option value="all">全部词汇</option><option value="今日新学">今日新学</option><option value="今日复习">今日复习</option><option value="个人错词">个人错词</option></select></div></div><div class="word-list" id="wordList"></div></section>
+<section class="page" id="page-mistakes"><div class="section-head"><h3>↻ 错题中心</h3><span class="tag">答对一次不等于永久掌握</span></div><div class="panel"><div class="chips" id="mistakeFilters"><button class="chip active" data-filter="all">全部</button><button class="chip" data-filter="待复习">待复习</button><button class="chip" data-filter="重复错误">重复错误</button><button class="chip" data-filter="复习中">复习中</button><button class="chip" data-filter="已掌握">已掌握</button></div><p class="subtext" style="margin-top:12px">练习后可在下方手动添加错题或易错点。每次复习都记录状态，掌握状态需要多次表现支持。</p></div><div class="two-col" style="margin-top:14px"><div class="panel"><h3>添加错题 / 易错点</h3><div class="field"><label>所属模块</label><select id="mistakeModule"><option>听力</option><option>阅读</option><option>写作</option><option>翻译</option><option>词汇</option></select></div><div class="field"><label>题目 / 单词 / 易错点</label><input id="mistakeTitle" placeholder="简短描述"></div><div class="field"><label>错误原因</label><input id="mistakeCause" placeholder="例如：同义替换没认出"></div><button class="btn primary" id="addMistake">添加到错题中心</button></div><div class="panel"><h3>复习规则</h3><p class="subtext">待复习 → 复习中 → 已掌握。重复出现的错误标记为“重复错误”。可以重新打开并修改状态；系统不会因为一次答对就自动永久结案。</p></div></div><div class="section-head"><h3>错题清单</h3></div><div class="mistake-list" id="mistakeList"></div></section>
+<section class="page" id="page-reports"><div class="section-head"><h3>▥ 学习报告</h3><div class="row"><button class="btn" id="copyDaily">复制每日简报</button><button class="btn primary" id="copyWeekly">复制每周报告</button></div></div><div class="report-cards"><div class="panel"><div class="subtext">今日任务完成</div><div class="report-number" id="reportTasks">0/5</div><div class="subtext">仅统计已保存的打卡</div></div><div class="panel"><div class="subtext">今日学习时间</div><div class="report-number" id="reportTime">0 分钟</div><div class="subtext">按任务实际时长合计</div></div><div class="panel"><div class="subtext">词汇库</div><div class="report-number" id="reportWords">0</div><div class="subtext">来自手动提交或导入</div></div></div><div class="section-head"><h3>最近 7 天活动</h3></div><div class="panel" id="weeklyActivity"></div><div class="section-head"><h3>本周分析与下周重点</h3></div><div class="panel"><p class="subtext">报告只依据你记录的数据。若练习数据不足，会明确标注“数据不足”，不会根据学习时长推测考试分数。</p><div id="reportInsights" class="subtext"></div></div></section>
+<section class="page" id="page-data"><div class="section-head"><h3>⬇ 数据与备份</h3><span class="tag sage">本地优先</span></div><div class="two-col"><div class="panel"><h3>导出备份</h3><p class="subtext">导出任务打卡、学习记录、词汇、错题、草稿和设置为 JSON 文件。备份中不包含任何墨墨访问令牌。</p><button class="btn primary" id="exportData">导出 JSON 备份</button><div class="divider"></div><h3>导入备份</h3><p class="subtext">导入前会验证格式；同 ID 记录会跳过，避免重复导入。</p><input type="file" id="importFile" accept="application/json,.json" style="max-width:100%;font-size:12px;margin:8px 0"><button class="btn" id="importData">验证并导入备份</button></div><div class="panel"><h3>学习设置</h3><div class="field"><label>今天可用学习时间（分钟）</label><input id="availableMinutes" type="number" min="15" max="480" value="120"></div><div class="field"><label>实际学习时间（分钟）</label><input id="actualMinutes" type="number" min="0" max="600" value="0"></div><button class="btn primary" id="saveSettings">保存设置</button><div class="divider"></div><h3>清空本地数据</h3><p class="subtext">清空后无法恢复，请先导出备份。此操作只清理本原型使用的本地数据。</p><button class="btn danger" id="clearData">清空全部本地数据</button></div></div><div class="notice">本地数据只存在于当前浏览器的此网站存储空间。清除浏览器数据、换浏览器或换设备可能导致记录丢失。请定期导出备份。</div><div class="section-head"><h3>墨墨连接状态</h3></div><div class="panel"><div class="row"><div><h3>墨墨背单词</h3><p class="subtext">当前：未连接。可直接手动录入或粘贴每日词表。API 接入暂不实施。</p></div><span class="tag">未连接</span></div></div></section>
+</main></div><div class="footer">V1.4 网页原型 · 本地数据 · 未连接墨墨 API · 不含真实题库或自动 AI 评分。真题与音频须由使用者核实来源和使用许可。</div></div><div class="toast" id="toast" role="status"></div>
 <script>
-const START = new Date(2026,9,24); // local calendar date
-const EXAM = new Date(2026,11,12);
-const baseTasks = [
- {id:"vocab",name:"A｜高频词汇与间隔复习",min:30,detail:"从免费高频词表学习约 25 个新词。每个词读音、词义、搭配都过一遍；再复习前 1、3、7 天标记的旧词。最后遮住中文自测。"},
- {id:"listen",name:"B｜四级听力精练",min:35,detail:"选一套音频、答案和原文齐全的真题，做一个完整小节。第一遍盲听答题；第二遍核对；对照原文找出 3 句漏听句；逐句跟读后再听。记录正确题数。"},
- {id:"read",name:"C｜阅读专项限时练习",min:35,detail:"完成一篇仔细阅读；先独立计时作答，再核对答案。每道错题标记：词汇、长句、定位、同义替换或干扰项。"},
- {id:"write",name:"D｜写作 / 翻译轮换",min:20,detail:"奇数日写 5–8 句或一个短段落；偶数日翻译 4–6 句。重点检查主谓一致、时态、词形、拼写和句子完整性。"},
- {id:"review",name:"E｜复盘与小测",min:30,detail:"重测今天的新词；重新听错的句子；不看答案重做阅读错题。记录最常见的 1–2 个问题，发回 ChatGPT 让陪练调整明日计划。"}
-];
-const stages = [
- {end:7,name:"基础诊断",change:"先建立正确率基线；不要为了做题量牺牲精听和复盘。"},
- {end:21,name:"听力阅读强化",change:"继续词汇积累，提高精听、跟读与限时阅读比例。"},
- {end:35,name:"专项提分",change:"保持听读，增加写作和翻译的限时产出。"},
- {end:42,name:"模拟与纠错",change:"至少完成一套完整限时真题，重点复盘可避免的错误。"},
- {end:60,name:"考前巩固",change:"以真题错题、高频词和熟悉题型为主，避免大量换新资料。"}
-];
-function localKey(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
-function dayNum(){const today=new Date();const a=new Date(today.getFullYear(),today.getMonth(),today.getDate());return Math.max(1,Math.floor((a-START)/86400000)+1)}
-function stageFor(n){return stages.find(s=>n<=s.end)||stages[stages.length-1]}
-function currentTasks(n){
- let ts=baseTasks.map(t=>({...t}));
- const stage=stageFor(n);
- if(n%2===0){ts.find(t=>t.id==="write").detail="翻译日：从真题翻译部分选 4–6 句，先独立翻译，再对照参考译文，整理 3 个可复用表达。";}
- else {ts.find(t=>t.id==="write").detail="写作日：围绕学习、科技、健康或校园生活写一个短段落，检查主谓一致、时态、拼写和句子完整性。";}
- if(n%3===0){ts.find(t=>t.id==="read").detail="长篇匹配日：限时完成一组段落信息匹配，圈出题干关键词和段落同义替换；做完后再补一篇仔细阅读中的错题复盘。";}
- if(n%5===0){ts.find(t=>t.id==="listen").detail="听力复测日：先完成一段未做过的真题，再回听前几天最难的 3 句。记录盲听正确题数，比较是否进步。";}
- if(stage.name==="模拟与纠错"){ts.find(t=>t.id==="review").detail="模拟复盘：把最近一次限时练习按题型统计，优先重做可避免的错题；若本周尚未做整套真题，今天安排完整计时。";}
- if(stage.name==="考前巩固"){ts.find(t=>t.id==="vocab").detail="考前复习：不大量增加新词，优先复习错词本、高频搭配和最近真题中的生词。";}
- return {ts,stage};
-}
-const dateKey=localKey(new Date()); const n=dayNum(); const {ts,stage}=currentTasks(n);
-document.getElementById("dayPill").textContent="Day "+n;
-document.getElementById("dateText").textContent=new Date().toLocaleDateString("zh-CN",{month:"long",day:"numeric",weekday:"short"})+" · "+stage.name;
-const tasksEl=document.getElementById("tasks");
-function key(s){return "cet4:"+dateKey+":"+s}
-function render(){
- tasksEl.innerHTML="";
- ts.forEach(t=>{
-  const card=document.createElement("div");card.className="card";
-  const top=document.createElement("div");top.className="tasktop";
-  const check=document.createElement("input");check.type="checkbox";check.className="check";check.checked=localStorage.getItem(key("done:"+t.id))==="1";check.setAttribute("aria-label","完成 "+t.name);
-  check.addEventListener("change",()=>{localStorage.setItem(key("done:"+t.id),check.checked?"1":"0");updateProgress()});
-  const content=document.createElement("div");content.style.flex="1";
-  const title=document.createElement("div");title.className="taskname";title.textContent=t.name;
-  content.appendChild(title);top.append(check,content);
-  const dur=document.createElement("span");dur.className="duration";dur.textContent=t.min+" 分钟";top.appendChild(dur);
-  const detail=document.createElement("div");detail.className="detail";detail.textContent=t.detail;
-  card.append(top,detail);
-  if(t.id==="listen"||t.id==="read"||t.id==="vocab"){
-   const links=document.createElement("div");links.className="links";
-   const a=document.createElement("a");a.href=t.id==="vocab"?"https://github.com/liut969/CET":"https://github.com/0609x/CET46-Resources";a.target="_blank";a.rel="noopener";a.textContent=t.id==="vocab"?"打开高频词表 ↗":"打开真题仓库 ↗";links.appendChild(a);card.appendChild(links);
-  }
-  tasksEl.appendChild(card);
- });
- updateProgress();
-}
-function updateProgress(){let count=ts.filter(t=>localStorage.getItem(key("done:"+t.id))==="1").length;document.getElementById("doneCount").textContent=count;document.getElementById("progressBar").style.width=(count/ts.length*100)+"%";}
-const fields=["listening","reading","words","notes"];
-function loadNotes(){fields.forEach(id=>document.getElementById(id).value=localStorage.getItem(key("note:"+id))||"");}
-function saveNotes(){fields.forEach(id=>localStorage.setItem(key("note:"+id),document.getElementById(id).value));document.getElementById("saveStatus").textContent="已保存到本设备："+dateKey+"（仅此浏览器）";}
-document.getElementById("saveBtn").addEventListener("click",saveNotes);
-document.getElementById("copyBtn").addEventListener("click",async()=>{saveNotes();const textOut="四级陪练复盘｜"+dateKey+"\n完成任务："+ts.filter(t=>localStorage.getItem(key("done:"+t.id))==="1").map(t=>t.name).join("、")+"\n听力："+document.getElementById("listening").value+"\n阅读："+document.getElementById("reading").value+"\n词汇："+document.getElementById("words").value+"\n备注："+document.getElementById("notes").value;try{await navigator.clipboard.writeText(textOut);document.getElementById("saveStatus").textContent="复盘已复制，可粘贴到 ChatGPT 对话。"}catch(e){document.getElementById("saveStatus").textContent=textOut;}});
-document.getElementById("resetBtn").addEventListener("click",()=>{if(confirm("确定重置今天的 5 项打卡吗？复盘文字不会删除。")){ts.forEach(t=>localStorage.removeItem(key("done:"+t.id)));render();}});
+const STORE='cet4SmartPrepV14';
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const defaults=()=>({version:'1.4',settings:{availableMinutes:120,actualMinutes:0},tasks:{},words:[],mistakes:[],listening:[],reading:[],writing:[],translation:[],drafts:{},notes:{},createdAt:new Date().toISOString()});
+let data=load();function load(){try{return {...defaults(),...JSON.parse(localStorage.getItem(STORE)||'{}')}}catch(e){return defaults()}}
+function persist(){localStorage.setItem(STORE,JSON.stringify(data));renderAll()}
+function toast(s){const t=document.getElementById('toast');t.textContent=s;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+function escapeHTML(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function navTo(page){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id==='page-'+page));document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.page===page));window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>navTo(b.dataset.page)));document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>navTo(b.dataset.go)));
+function taskDefs(){const mins=Number(data.settings.availableMinutes)||120;const base=[['vocabulary','词汇 · 今日新学与到期复习','先完成到期词，再新增 10–15 词。进入「词汇」页做小测；错词加入个人错词，并写一条记忆提示。','✿',25],['listening','听力 · 真题精听与错句重听','打开听力页，填写真实真题来源（年份/月份/第几套/题型）。第一遍不暂停作答；第二遍对答案；最后对照原文重听错句 2 次。记录正确题数与错因。','♫',30],['reading','阅读 · 真题限时定位','选择一篇真题阅读，先在来源栏写清年份/月份/套别/题型。按题型计时完成；逐题标出原文证据和同义替换，记录正确题数。','▤',25],['writing','写作 · 审题、提纲与段落','使用真题题目或明确标注的模拟题。限时 5 分钟审题列提纲、15 分钟写作、5 分钟检查语法/词形/衔接；保存原稿，再把修改意见记录到复盘栏。','✎',20],['translation','翻译 · 真题句段与逐句复盘','使用有明确来源的真题中文段落，先独立翻译 4–6 句；逐句对照参考译文，标记漏译、语序、搭配和时态问题，保存原文与译文。','文',20]];let total=base.reduce((a,b)=>a+b[4],0);return base.map(t=>({...{id:t[0],title:t[1],detail:t[2],icon:t[3]},minutes:Math.max(5,Math.round(t[4]*mins/total))}))}
+function todayTaskState(id){return data.tasks[today()]?.[id]||{done:false,actual:0,skipped:false}}
+function setTask(id,field,val){if(!data.tasks[today()])data.tasks[today()]={};if(!data.tasks[today()][id])data.tasks[today()][id]={done:false,actual:0,skipped:false};data.tasks[today()][id][field]=val;persist()}
+function renderTasks(){const defs=taskDefs();const html=defs.map(t=>{const s=todayTaskState(t.id);return `<article class="task"><div class="task-head"><input class="task-check" type="checkbox" ${s.done?'checked':''} aria-label="完成${t.title}" data-taskcheck="${t.id}"><div style="flex:1"><h4>${t.icon} ${t.title}</h4><span class="tag">建议 ${t.minutes} 分钟</span></div></div><p>${t.detail}</p><div class="task-foot"><label class="subtext">实际分钟 <input data-taskactual="${t.id}" type="number" min="0" max="300" value="${Number(s.actual)||0}" style="width:66px;padding:5px;border:1px solid var(--line);border-radius:8px;background:#fffefa"></label><button class="btn small ${s.skipped?'soft':''}" data-skip="${t.id}">${s.skipped?'已跳过 · 撤销':'今天跳过'}</button></div></article>`}).join('');document.getElementById('homeTasks').innerHTML=html;document.querySelectorAll('[data-taskcheck]').forEach(e=>e.addEventListener('change',()=>setTask(e.dataset.taskcheck,'done',e.checked)));document.querySelectorAll('[data-taskactual]').forEach(e=>e.addEventListener('change',()=>setTask(e.dataset.taskactual,'actual',Math.max(0,Number(e.value)||0))));document.querySelectorAll('[data-skip]').forEach(e=>e.addEventListener('click',()=>setTask(e.dataset.skip,'skipped',!todayTaskState(e.dataset.skip).skipped)));}
+function getDone(){return taskDefs().filter(t=>todayTaskState(t.id).done).length}function getActual(){return taskDefs().reduce((s,t)=>s+(Number(todayTaskState(t.id).actual)||0),0)+(Number(data.settings.actualMinutes)||0)}
+function renderHome(){document.getElementById('todayDate').textContent=new Date().toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long'});document.getElementById('availableTimeTag').textContent='可用时间：'+data.settings.availableMinutes+' 分钟';const done=getDone();document.getElementById('homeTaskValue').textContent=done+'/5';document.getElementById('homeTaskBar').style.width=done/5*100+'%';const actual=getActual();document.getElementById('homeTimeValue').textContent=actual;document.getElementById('homeTimeBar').style.width=Math.min(100,actual/Math.max(1,data.settings.availableMinutes)*100)+'%';const due=data.words.filter(w=>w.nextReview&&w.nextReview<=today()&&w.status!=='known');const reviewed=due.filter(w=>w.reviewedToday===today()).length;document.getElementById('homeVocabValue').textContent=reviewed+'/'+due.length;document.getElementById('homeVocabBar').style.width=(due.length?reviewed/due.length*100:0)+'%';document.getElementById('gardenArt').textContent=done===0?'🌱':done<3?'🌿':done<5?'🌷':'🌳';document.getElementById('gardenTitle').textContent=done===5?'今天的花园盛开啦！':done>0?'你已经种下 '+done+' 颗成长种子':'种下今天的第一颗种子';document.getElementById('gardenText').textContent=done===5?'五项任务都已完成，记得给自己一点肯定。':'完成任务后，花园会慢慢长大。这里不比较速度，只记录你的坚持。'}
+function chips(key){const box=document.querySelector(`[data-tags="${key}"]`);return box?[...box.querySelectorAll('.chip.active')].map(b=>b.textContent):[]}document.querySelectorAll('[data-tags]').forEach(box=>box.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{if(box.dataset.tags==='wordKind'){box.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active')}else b.classList.toggle('active')})));
+function savePractice(kind){const isL=kind==='listening',prefix=isL?'listen':'read';const c=Number(document.getElementById(prefix+'Correct').value),t=Number(document.getElementById(prefix+'Total').value),mins=Number(document.getElementById(prefix+'Minutes').value)||0;if(!t||c<0||c>t){toast('请填写有效的正确题数和总题数');return}const rec={id:uid(),date:today(),type:document.getElementById(prefix+'Type').value,correct:c,total:t,minutes:mins,tags:chips(isL?'listenTags':'readTags'),source:document.getElementById(prefix+'Source').value,replay:isL?Number(document.getElementById('listenReplay').value)||0:0};data[kind].unshift(rec);persist();toast('练习记录已保存')}
+document.getElementById('saveListen').onclick=()=>savePractice('listening');document.getElementById('saveRead').onclick=()=>savePractice('reading');
+function historyHTML(arr,kind){if(!arr.length)return '<div class="empty">还没有记录。完成练习后可以在这里查看。</div>';return `<div class="table-wrap"><table><thead><tr><th>日期</th><th>类型</th><th>结果</th><th>用时</th><th>错因</th></tr></thead><tbody>${arr.slice(0,12).map(r=>`<tr><td>${escapeHTML(r.date)}</td><td>${escapeHTML(r.type)}</td><td>${r.correct}/${r.total}（${Math.round(r.correct/r.total*100)}%）</td><td>${r.minutes} 分钟${kind==='listening'?' · 重听 '+r.replay+' 次':''}</td><td>${escapeHTML((r.tags||[]).join('、')||'未标注')}<div class="subtext">${escapeHTML(r.source||'')}</div></td></tr>`).join('')}</tbody></table></div>`}
+function saveDraft(){const d={id:uid(),date:today(),prompt:document.getElementById('writePrompt').value,draft:document.getElementById('writeDraft').value,feedback:document.getElementById('writeFeedback').value,words:document.getElementById('writeDraft').value.trim()?document.getElementById('writeDraft').value.trim().split(/\s+/).length:0};if(!d.draft.trim()){toast('先输入作文内容');return}data.writing.unshift(d);data.drafts={prompt:d.prompt,draft:d.draft,feedback:d.feedback};persist();toast('写作记录已保存')}
+document.getElementById('writeDraft').addEventListener('input',()=>document.getElementById('wordCount').textContent=(document.getElementById('writeDraft').value.trim()?document.getElementById('writeDraft').value.trim().split(/\s+/).length:0)+' words');document.getElementById('saveDraft').onclick=()=>{data.drafts={prompt:document.getElementById('writePrompt').value,draft:document.getElementById('writeDraft').value,feedback:document.getElementById('writeFeedback').value};persist();toast('草稿已保存')};document.getElementById('submitDraft').onclick=saveDraft;
+document.getElementById('saveTrans').onclick=()=>{const source=document.getElementById('transSource').value.trim(),draft=document.getElementById('transDraft').value.trim();if(!source||!draft){toast('请先填写原文和译文');return}data.translation.unshift({id:uid(),date:today(),source,draft,feedback:document.getElementById('transFeedback').value});persist();toast('翻译记录已保存')};
+function addWord(term,pos,meaning,kind,status,note){term=term.trim();if(!term){toast('请先填写单词');return}const found=data.words.find(w=>w.term.toLowerCase()===term.toLowerCase());if(found){found.kind=[...new Set([...(Array.isArray(found.kind)?found.kind:[found.kind]),kind])];if(meaning&&!found.meaning)found.meaning=meaning;if(note&&!found.note)found.note=note;found.updatedAt=today();toast('已合并同一单词，保留来源标签')}else data.words.unshift({id:uid(),term,pos,meaning,kind:[kind],status,note,date:today(),nextReview:today(),reviewedToday:'',reviewCount:0,createdAt:new Date().toISOString()});persist()}
+document.getElementById('addWord').onclick=()=>{addWord(document.getElementById('wordTerm').value,document.getElementById('wordPos').value,document.getElementById('wordMeaning').value, chips('wordKind')[0]||'今日新学',document.getElementById('wordStatus').value,document.getElementById('wordNote').value);['wordTerm','wordPos','wordMeaning','wordNote'].forEach(id=>document.getElementById(id).value='')};
+document.getElementById('importWordsText').onclick=()=>{const lines=document.getElementById('bulkWords').value.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);if(!lines.length){toast('请先粘贴词表');return}let count=0;for(const line of lines){const p=line.split(/[|｜\t]/).map(x=>x.trim());if(!p[0])continue;let kind=(p[3]||'今日新学').replace('新学','今日新学').replace('复习','今日复习').replace('错词','个人错词');if(!['今日新学','今日复习','个人错词'].includes(kind))kind='今日新学';addWordSilent(p[0],p[1]||'',p[2]||'',kind,'unknown',p.slice(4).join(' | '));count++}persist();toast('已导入 '+count+' 行词汇')};function addWordSilent(term,pos,meaning,kind,status,note){const f=data.words.find(w=>w.term.toLowerCase()===term.toLowerCase());if(f){f.kind=[...new Set([...(Array.isArray(f.kind)?f.kind:[f.kind]),kind])];if(meaning&&!f.meaning)f.meaning=meaning;return}data.words.unshift({id:uid(),term,pos,meaning,kind:[kind],status,note,date:today(),nextReview:today(),reviewedToday:'',reviewCount:0,createdAt:new Date().toISOString()})}
+function wordKind(w){return Array.isArray(w.kind)?w.kind:[w.kind||'今日新学']}function renderWords(){const q=document.getElementById('wordSearch').value.toLowerCase(),filter=document.getElementById('wordFilter').value;const words=data.words.filter(w=>(!q||(w.term+' '+w.meaning+' '+w.note).toLowerCase().includes(q))&&(filter==='all'||wordKind(w).includes(filter)));document.getElementById('wordCountLabel').textContent='（'+data.words.length+' 个）';const due=data.words.filter(w=>w.nextReview&&w.nextReview<=today()&&w.status!=='known');document.getElementById('dueWordSummary').textContent=due.length?'今天有 '+due.length+' 个到期词汇；复习后可标记结果。':'今天没有待复习词汇，或还没有添加词汇。';document.getElementById('wordList').innerHTML=words.length?words.map(w=>`<article class="word"><div class="word-main"><strong>${escapeHTML(w.term)}</strong> <span class="muted">${escapeHTML(w.pos||'')}</span><small>${escapeHTML(w.meaning||'释义待补充')}</small><small>${wordKind(w).map(escapeHTML).join(' · ')} · ${w.status==='known'?'暂时掌握':w.status==='learning'?'复习中':'待巩固'} · 下次复习 ${escapeHTML(w.nextReview||'待安排')}</small>${w.note?`<small>${escapeHTML(w.note)}</small>`:''}</div><div class="word-actions"><button class="btn small" data-review="${w.id}">复习完成</button><button class="btn small" data-wordknown="${w.id}">掌握</button><button class="btn small danger" data-worddelete="${w.id}">删除</button></div></article>`).join(''):'<div class="empty">没有匹配的词汇。</div>';document.querySelectorAll('[data-review]').forEach(b=>b.onclick=()=>reviewWord(b.dataset.review));document.querySelectorAll('[data-wordknown]').forEach(b=>b.onclick=()=>{const w=data.words.find(x=>x.id===b.dataset.wordknown);if(w){w.status='known';w.reviewedToday=today();w.reviewCount=(w.reviewCount||0)+1;w.nextReview=addDays(today(),30);persist();toast('已标记暂时掌握；后续仍可复习')}});document.querySelectorAll('[data-worddelete]').forEach(b=>b.onclick=()=>{if(confirm('确定删除这个词汇记录？')){data.words=data.words.filter(x=>x.id!==b.dataset.worddelete);persist()}})}function addDays(d,n){const a=new Date(d+'T12:00:00');a.setDate(a.getDate()+n);return a.getFullYear()+'-'+String(a.getMonth()+1).padStart(2,'0')+'-'+String(a.getDate()).padStart(2,'0')}function reviewWord(id){const w=data.words.find(x=>x.id===id);if(!w)return;w.reviewedToday=today();w.reviewCount=(w.reviewCount||0)+1;w.status='learning';const interval=[1,3,7,14,30][Math.min(4,Math.max(0,w.reviewCount-1))];w.nextReview=addDays(today(),interval);persist();toast('复习已记录，下次复习：'+w.nextReview)}document.getElementById('wordSearch').oninput=renderWords;document.getElementById('wordFilter').onchange=renderWords;
+document.getElementById('addMistake').onclick=()=>{const title=document.getElementById('mistakeTitle').value.trim();if(!title){toast('请填写错题或易错点');return}data.mistakes.unshift({id:uid(),date:today(),module:document.getElementById('mistakeModule').value,title,cause:document.getElementById('mistakeCause').value,status:'待复习',repeat:0,reviewedAt:''});document.getElementById('mistakeTitle').value='';document.getElementById('mistakeCause').value='';persist();toast('已加入错题中心')};let mistakeFilter='all';document.querySelectorAll('#mistakeFilters .chip').forEach(b=>b.onclick=()=>{mistakeFilter=b.dataset.filter;document.querySelectorAll('#mistakeFilters .chip').forEach(x=>x.classList.toggle('active',x===b));renderMistakes()});function renderMistakes(){const list=data.mistakes.filter(m=>mistakeFilter==='all'||m.status===mistakeFilter);document.getElementById('mistakeList').innerHTML=list.length?list.map(m=>`<article class="mistake"><div style="flex:1"><div><span class="tag">${escapeHTML(m.module)}</span> <span class="status ${m.status==='已掌握'?'done':''}">${escapeHTML(m.status)}</span></div><strong style="display:block;margin:8px 0">${escapeHTML(m.title)}</strong><div class="subtext">错因：${escapeHTML(m.cause||'未标注')} · 重复错误：${m.repeat||0} 次 · 最近复习：${escapeHTML(m.reviewedAt||'尚未复习')}</div></div><div style="display:grid;gap:5px"><button class="btn small" data-mreview="${m.id}">复习一次</button><select data-mstatus="${m.id}" style="padding:6px;border:1px solid var(--line);border-radius:8px;font-size:11px"><option ${m.status==='待复习'?'selected':''}>待复习</option><option ${m.status==='重复错误'?'selected':''}>重复错误</option><option ${m.status==='复习中'?'selected':''}>复习中</option><option ${m.status==='已掌握'?'selected':''}>已掌握</option></select></div></article>`).join(''):'<div class="empty">错题清单还是空的。练习后可以把易错点记在这里。</div>';document.querySelectorAll('[data-mreview]').forEach(b=>b.onclick=()=>{const m=data.mistakes.find(x=>x.id===b.dataset.mreview);if(m){m.repeat=(m.repeat||0)+1;m.reviewedAt=today();m.status=m.repeat>=2?'重复错误':'复习中';persist()}});document.querySelectorAll('[data-mstatus]').forEach(s=>s.onchange=()=>{const m=data.mistakes.find(x=>x.id===s.dataset.mstatus);if(m){m.status=s.value;persist()}})}
+function renderHistory(){document.getElementById('listenHistory').innerHTML=historyHTML(data.listening,'listening');document.getElementById('readHistory').innerHTML=historyHTML(data.reading,'reading');document.getElementById('writeHistory').innerHTML=data.writing.length?data.writing.slice(0,10).map(x=>`<div class="word"><div class="word-main"><strong>${escapeHTML(x.prompt||'写作练习')}</strong><small>${x.date} · ${x.words} words</small><small>${escapeHTML(x.draft.slice(0,180))}${x.draft.length>180?'…':''}</small></div><button class="btn small" data-loadwrite="${x.id}">打开</button></div>`).join(''):'<div class="empty">还没有写作记录。</div>';document.querySelectorAll('[data-loadwrite]').forEach(b=>b.onclick=()=>{const x=data.writing.find(y=>y.id===b.dataset.loadwrite);if(x){document.getElementById('writePrompt').value=x.prompt;document.getElementById('writeDraft').value=x.draft;document.getElementById('writeFeedback').value=x.feedback||'';document.getElementById('wordCount').textContent=x.words+' words';window.scrollTo({top:0,behavior:'smooth'})}});document.getElementById('transHistory').innerHTML=data.translation.length?data.translation.slice(0,10).map(x=>`<div class="word"><div class="word-main"><strong>${escapeHTML(x.date)} · 翻译记录</strong><small>原文：${escapeHTML(x.source.slice(0,130))}</small><small>译文：${escapeHTML(x.draft.slice(0,130))}</small></div></div>`).join(''):'<div class="empty">还没有翻译记录。</div>'}
+function reportText(weekly){const d=new Date();const date=today();const done=getDone(),mins=getActual();const words=data.words.filter(w=>w.date===date).length;const l=data.listening.filter(r=>weekly||r.date===date),r=data.reading.filter(r=>weekly||r.date===date);const sum=a=>a.reduce((s,x)=>s+x.correct,0),total=a=>a.reduce((s,x)=>s+x.total,0);const pct=a=>total(a)?Math.round(sum(a)/total(a)*100)+'%':'数据不足';if(!weekly)return `四级每日简报｜${date}\n今日任务：${done}/5 完成\n实际学习时长：${mins} 分钟\n今日新增记录词汇：${words} 个\n听力记录：${l.length} 条，正确率 ${pct(l)}\n阅读记录：${r.length} 条，正确率 ${pct(r)}\n错题待复习：${data.mistakes.filter(m=>m.status!=='已掌握').length} 条\n备注：以上仅统计已保存数据；缺失项不作推算。`;const last7=new Date();last7.setDate(last7.getDate()-6);const cutoff=last7.getFullYear()+'-'+String(last7.getMonth()+1).padStart(2,'0')+'-'+String(last7.getDate()).padStart(2,'0');const wl=data.words.filter(w=>w.date>=cutoff).length;return `四级每周学习报告｜${cutoff} 至 ${date}\n任务完成：今日 ${done}/5（当前原型保留每日打卡记录）\n累计词汇记录：${wl} 个（按词条创建日期估算）\n听力：${l.length} 条记录，正确率 ${pct(l)}\n阅读：${r.length} 条记录，正确率 ${pct(r)}\n写作记录：${data.writing.filter(x=>x.date>=cutoff).length} 条\n翻译记录：${data.translation.filter(x=>x.date>=cutoff).length} 条\n错题待巩固：${data.mistakes.filter(m=>m.status!=='已掌握').length} 条\n下周重点：优先处理重复错误和到期词汇；如数据不足，先建立记录基线。\n说明：此原型的任务统计只展示当天打卡，不能冒充完整历史任务趋势。`}
+function renderReports(){document.getElementById('reportTasks').textContent=getDone()+'/5';document.getElementById('reportTime').textContent=getActual()+' 分钟';document.getElementById('reportWords').textContent=data.words.length;const rows=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const ds=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');const wc=data.words.filter(w=>w.date===ds).length;const lc=data.listening.filter(w=>w.date===ds).length;const rc=data.reading.filter(w=>w.date===ds).length;rows.push(`<tr><td>${ds}</td><td>${wc}</td><td>${lc}</td><td>${rc}</td></tr>`)}document.getElementById('weeklyActivity').innerHTML=`<div class="table-wrap"><table><thead><tr><th>日期</th><th>词汇记录</th><th>听力记录</th><th>阅读记录</th></tr></thead><tbody>${rows.join('')}</tbody></table></div>`;document.getElementById('reportInsights').innerHTML=`<p>听力记录：${data.listening.length} 条；阅读记录：${data.reading.length} 条。写作 ${data.writing.length} 条，翻译 ${data.translation.length} 条。</p><p>词汇库：${data.words.length} 个词条；待巩固错题：${data.mistakes.filter(m=>m.status!=='已掌握').length} 条。</p><p>建议：优先处理重复错误；按实际数据调整下一周任务。如果记录不足，不生成成绩趋势或分数预测。</p>`}
+document.getElementById('copyDaily').onclick=()=>copyText(reportText(false));document.getElementById('copyWeekly').onclick=()=>copyText(reportText(true));async function copyText(s){try{await navigator.clipboard.writeText(s);toast('报告已复制')}catch(e){prompt('复制以下报告内容：',s)}}
+document.getElementById('editTimeBtn').onclick=()=>{navTo('data');document.getElementById('availableMinutes').focus()};document.getElementById('saveSettings').onclick=()=>{data.settings.availableMinutes=Math.min(480,Math.max(15,Number(document.getElementById('availableMinutes').value)||120));data.settings.actualMinutes=Math.min(600,Math.max(0,Number(document.getElementById('actualMinutes').value)||0));persist();toast('设置已保存')};
+document.getElementById('exportData').onclick=()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cet4-smart-prep-backup-'+today()+'.json';a.click();URL.revokeObjectURL(a.href);toast('备份已导出')};document.getElementById('importData').onclick=()=>{const f=document.getElementById('importFile').files[0];if(!f){toast('请先选择 JSON 备份文件');return}const rd=new FileReader();rd.onload=()=>{try{const x=JSON.parse(rd.result);if(!x||x.version==null||!Array.isArray(x.words)||!Array.isArray(x.mistakes))throw new Error('格式不符合预期');if(!confirm('备份格式有效。将合并词汇和错题，重复 ID 会跳过；其他历史记录按 ID 合并。继续？'))return;const merge=(a,b)=>{const ids=new Set(a.map(i=>i.id));return [...a,...b.filter(i=>!i.id||!ids.has(i.id))]};data.words=merge(data.words,x.words);data.mistakes=merge(data.mistakes,x.mistakes);['listening','reading','writing','translation'].forEach(k=>data[k]=merge(data[k]||[],x[k]||[]));data.tasks={...x.tasks,...data.tasks};persist();toast('备份数据已合并')}catch(e){toast('文件无效或版本不兼容')}};rd.readAsText(f)};document.getElementById('clearData').onclick=()=>{if(confirm('确定清空本原型全部本地学习数据？建议先导出备份。')){localStorage.removeItem(STORE);data=defaults();persist();toast('本地数据已清空')}};
 
-/* 新增：每日真题安排与 JSON 数据备份 */
-(function () {
-  const main = document.querySelector("main");
-  if (!main || document.getElementById("extraFeatures")) return;
+let quizState={pool:[],current:null,answered:false,correct:0,total:0,options:[]};
+function startQuiz(){const pool=data.words.filter(w=>(w.meaning||'').trim());if(pool.length<2){toast('至少需要 2 个带中文释义的词汇');return}quizState={pool:pool.slice().sort(()=>Math.random()-.5),current:null,answered:false,correct:0,total:0,options:[]};document.getElementById('quizFeedback').classList.add('hidden');document.getElementById('nextQuiz').disabled=true;nextQuizQuestion()}
+function nextQuizQuestion(){if(!quizState.pool.length){document.getElementById('quizQuestion').textContent='本轮完成！';document.getElementById('quizOptions').innerHTML='';document.getElementById('quizStatus').textContent='本轮词汇已测完，可以重新开始复习。';document.getElementById('nextQuiz').disabled=true;document.getElementById('quizScore').textContent=`本轮得分：${quizState.correct} / ${quizState.total}`;return}quizState.current=quizState.pool.pop();quizState.answered=false;const others=data.words.filter(w=>w.id!==quizState.current.id&&(w.meaning||'').trim());const distractors=others.sort(()=>Math.random()-.5).slice(0,3).map(w=>w.meaning);quizState.options=[...new Set([quizState.current.meaning,...distractors])].sort(()=>Math.random()-.5);document.getElementById('quizQuestion').textContent=quizState.current.term+(quizState.current.pos?' · '+quizState.current.pos:'');document.getElementById('quizStatus').textContent='选择正确的中文释义';document.getElementById('quizFeedback').classList.add('hidden');document.getElementById('quizOptions').innerHTML=quizState.options.map((o,i)=>`<button class="chip" data-quizanswer="${i}">${escapeHTML(o)}</button>`).join('');document.querySelectorAll('[data-quizanswer]').forEach(b=>b.onclick=()=>answerQuiz(Number(b.dataset.quizanswer)));document.getElementById('nextQuiz').disabled=true;document.getElementById('quizScore').textContent=`本轮得分：${quizState.correct} / ${quizState.total}`}
+function answerQuiz(i){if(quizState.answered)return;quizState.answered=true;quizState.total++;const chosen=quizState.options[i],ok=chosen===quizState.current.meaning;if(ok)quizState.correct++;else{const w=quizState.current;w.status='learning';if(!wordKind(w).includes('个人错词'))w.kind=[...wordKind(w),'个人错词'];w.nextReview=today();}const fb=document.getElementById('quizFeedback');fb.classList.remove('hidden');fb.textContent=ok?'回答正确！继续保持。':'还不对。正确释义：'+quizState.current.meaning+'。已把这个词加入个人错词/复习中。';document.querySelectorAll('[data-quizanswer]').forEach((b,j)=>{b.disabled=true;if(quizState.options[j]===quizState.current.meaning)b.classList.add('active')});document.getElementById('nextQuiz').disabled=false;document.getElementById('quizScore').textContent=`本轮得分：${quizState.correct} / ${quizState.total}`;persist();renderWords()}
+document.getElementById('startQuiz').onclick=startQuiz;document.getElementById('nextQuiz').onclick=nextQuizQuestion;
 
-  const extra = document.createElement("div");
-  extra.id = "extraFeatures";
-
-  const plans = [
-    "2024年6月第1套：听力理解，完成一整个题型部分。",
-    "2024年6月第1套：仔细阅读，完成两篇文章并核对答案。",
-    "2024年12月第1套：长篇阅读，练习段落信息匹配。",
-    "2025年6月第1套：翻译，完成整段翻译并对照参考答案。",
-    "2025年6月第1套：写作，限时完成一篇作文。",
-    "2025年12月第1套：听力理解，完成一整个题型部分。",
-    "2025年12月第1套：仔细阅读，完成两篇文章并复盘错题。"
-  ];
-
-  const plan = plans[(dayNum() - 1) % plans.length];
-
-  extra.innerHTML = `
-    <div class="sectiontitle">今日真题安排</div>
-    <div class="card">
-      <div class="taskname" id="paperPlan"></div>
-      <p class="meta">
-        请在真题仓库中核对对应年份、月份、套题及答案。
-        若该套资料缺失或没有音频，请选有完整答案的同题型真题，
-        并在复盘中记录实际使用的试卷。
-      </p>
-      <div class="links">
-        <a href="https://github.com/0609x/CET46-Resources"
-           target="_blank" rel="noopener">打开真题仓库 ↗</a>
-      </div>
-    </div>
-    <div class="sectiontitle">数据与备份</div>
-    <div class="card">
-      <p class="meta">
-        备份包含本网页 cet4: 开头的本地记录。
-        建议定期导出，并把 JSON 文件保存到安全的位置。
-        恢复备份会覆盖相同键名的记录。
-      </p>
-      <div class="links">
-        <button class="btn primary" id="exportCET4">导出 JSON 备份</button>
-        <button class="btn" id="importCET4">从 JSON 恢复</button>
-        <input id="importFileCET4" type="file"
-          accept=".json,application/json" hidden>
-      </div>
-      <p class="meta" id="backupStatus" aria-live="polite"></p>
-    </div>
-  `;
-
-  const firstTitle = [...main.querySelectorAll(".sectiontitle")]
-    .find(el => el.textContent.trim() === "今日任务清单");
-  if (firstTitle) main.insertBefore(extra, firstTitle);
-  else main.appendChild(extra);
-
-  document.getElementById("paperPlan").textContent = plan;
-
-  document.getElementById("exportCET4").addEventListener("click", () => {
-    const data = {};
-    for (let i = 0; i < localStorage.length; i++) {
-      const k = localStorage.key(i);
-      if (k && k.startsWith("cet4:")) data[k] = localStorage.getItem(k);
-    }
-
-    const backup = {
-      app: "CET4-Daily-Panel",
-      version: 1,
-      exportedAt: new Date().toISOString(),
-      data
-    };
-
-    const blob = new Blob(
-      [JSON.stringify(backup, null, 2)],
-      { type: "application/json" }
-    );
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "cet4-backup-" + localKey(new Date()) + ".json";
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-    document.getElementById("backupStatus").textContent =
-      "已生成 JSON 备份，请确认浏览器已保存文件。";
-  });
-
-  const fileInput = document.getElementById("importFileCET4");
-  document.getElementById("importCET4").addEventListener("click", () => {
-    fileInput.click();
-  });
-
-  fileInput.addEventListener("change", async () => {
-    const file = fileInput.files[0];
-    if (!file) return;
-
-    try {
-      const backup = JSON.parse(await file.text());
-      if (
-        backup.app !== "CET4-Daily-Panel" ||
-        backup.version !== 1 ||
-        !backup.data ||
-        typeof backup.data !== "object" ||
-        Array.isArray(backup.data)
-      ) throw new Error("备份文件格式不正确");
-
-      const entries = Object.entries(backup.data);
-      if (!entries.every(([k, v]) =>
-        k.startsWith("cet4:") &&
-        typeof v === "string"
-      )) throw new Error("备份中包含不支持的数据");
-
-      if (!confirm(
-        "确认恢复这份备份吗？相同键名的本地记录将被覆盖。"
-      )) return;
-
-      entries.forEach(([k, v]) => localStorage.setItem(k, v));
-      alert("恢复完成，页面即将刷新。");
-      location.reload();
-    } catch (e) {
-      alert("恢复失败：" + e.message);
-    } finally {
-      fileInput.value = "";
-    }
-  });
-})();
-render();loadNotes();
-</script>
-</body>
-</html>
+function renderAll(){renderTasks();renderHome();renderWords();renderMistakes();renderHistory();renderReports();document.getElementById('availableMinutes').value=data.settings.availableMinutes;document.getElementById('actualMinutes').value=data.settings.actualMinutes;}
+if(data.drafts){document.getElementById('writePrompt').value=data.drafts.prompt||'';document.getElementById('writeDraft').value=data.drafts.draft||'';document.getElementById('writeFeedback').value=data.drafts.feedback||'';document.getElementById('wordCount').textContent=(data.drafts.draft||'').trim()?(data.drafts.draft||'').trim().split(/\s+/).length+' words':'0 words'}
+renderAll();
+</script></body></html>
