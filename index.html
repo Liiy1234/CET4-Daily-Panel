@@ -127,6 +127,132 @@ function saveNotes(){fields.forEach(id=>localStorage.setItem(key("note:"+id),doc
 document.getElementById("saveBtn").addEventListener("click",saveNotes);
 document.getElementById("copyBtn").addEventListener("click",async()=>{saveNotes();const textOut="四级陪练复盘｜"+dateKey+"\n完成任务："+ts.filter(t=>localStorage.getItem(key("done:"+t.id))==="1").map(t=>t.name).join("、")+"\n听力："+document.getElementById("listening").value+"\n阅读："+document.getElementById("reading").value+"\n词汇："+document.getElementById("words").value+"\n备注："+document.getElementById("notes").value;try{await navigator.clipboard.writeText(textOut);document.getElementById("saveStatus").textContent="复盘已复制，可粘贴到 ChatGPT 对话。"}catch(e){document.getElementById("saveStatus").textContent=textOut;}});
 document.getElementById("resetBtn").addEventListener("click",()=>{if(confirm("确定重置今天的 5 项打卡吗？复盘文字不会删除。")){ts.forEach(t=>localStorage.removeItem(key("done:"+t.id)));render();}});
+
+/* 新增：每日真题安排与 JSON 数据备份 */
+(function () {
+  const main = document.querySelector("main");
+  if (!main || document.getElementById("extraFeatures")) return;
+
+  const extra = document.createElement("div");
+  extra.id = "extraFeatures";
+
+  const plans = [
+    "2024年6月第1套：听力理解，完成一整个题型部分。",
+    "2024年6月第1套：仔细阅读，完成两篇文章并核对答案。",
+    "2024年12月第1套：长篇阅读，练习段落信息匹配。",
+    "2025年6月第1套：翻译，完成整段翻译并对照参考答案。",
+    "2025年6月第1套：写作，限时完成一篇作文。",
+    "2025年12月第1套：听力理解，完成一整个题型部分。",
+    "2025年12月第1套：仔细阅读，完成两篇文章并复盘错题。"
+  ];
+
+  const plan = plans[(dayNum() - 1) % plans.length];
+
+  extra.innerHTML = `
+    <div class="sectiontitle">今日真题安排</div>
+    <div class="card">
+      <div class="taskname" id="paperPlan"></div>
+      <p class="meta">
+        请在真题仓库中核对对应年份、月份、套题及答案。
+        若该套资料缺失或没有音频，请选有完整答案的同题型真题，
+        并在复盘中记录实际使用的试卷。
+      </p>
+      <div class="links">
+        <a href="https://github.com/0609x/CET46-Resources"
+           target="_blank" rel="noopener">打开真题仓库 ↗</a>
+      </div>
+    </div>
+    <div class="sectiontitle">数据与备份</div>
+    <div class="card">
+      <p class="meta">
+        备份包含本网页 cet4: 开头的本地记录。
+        建议定期导出，并把 JSON 文件保存到安全的位置。
+        恢复备份会覆盖相同键名的记录。
+      </p>
+      <div class="links">
+        <button class="btn primary" id="exportCET4">导出 JSON 备份</button>
+        <button class="btn" id="importCET4">从 JSON 恢复</button>
+        <input id="importFileCET4" type="file"
+          accept=".json,application/json" hidden>
+      </div>
+      <p class="meta" id="backupStatus" aria-live="polite"></p>
+    </div>
+  `;
+
+  const firstTitle = [...main.querySelectorAll(".sectiontitle")]
+    .find(el => el.textContent.trim() === "今日任务清单");
+  if (firstTitle) main.insertBefore(extra, firstTitle);
+  else main.appendChild(extra);
+
+  document.getElementById("paperPlan").textContent = plan;
+
+  document.getElementById("exportCET4").addEventListener("click", () => {
+    const data = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith("cet4:")) data[k] = localStorage.getItem(k);
+    }
+
+    const backup = {
+      app: "CET4-Daily-Panel",
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      data
+    };
+
+    const blob = new Blob(
+      [JSON.stringify(backup, null, 2)],
+      { type: "application/json" }
+    );
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "cet4-backup-" + localKey(new Date()) + ".json";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    document.getElementById("backupStatus").textContent =
+      "已生成 JSON 备份，请确认浏览器已保存文件。";
+  });
+
+  const fileInput = document.getElementById("importFileCET4");
+  document.getElementById("importCET4").addEventListener("click", () => {
+    fileInput.click();
+  });
+
+  fileInput.addEventListener("change", async () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    try {
+      const backup = JSON.parse(await file.text());
+      if (
+        backup.app !== "CET4-Daily-Panel" ||
+        backup.version !== 1 ||
+        !backup.data ||
+        typeof backup.data !== "object" ||
+        Array.isArray(backup.data)
+      ) throw new Error("备份文件格式不正确");
+
+      const entries = Object.entries(backup.data);
+      if (!entries.every(([k, v]) =>
+        k.startsWith("cet4:") &&
+        typeof v === "string"
+      )) throw new Error("备份中包含不支持的数据");
+
+      if (!confirm(
+        "确认恢复这份备份吗？相同键名的本地记录将被覆盖。"
+      )) return;
+
+      entries.forEach(([k, v]) => localStorage.setItem(k, v));
+      alert("恢复完成，页面即将刷新。");
+      location.reload();
+    } catch (e) {
+      alert("恢复失败：" + e.message);
+    } finally {
+      fileInput.value = "";
+    }
+  });
+})();
 render();loadNotes();
 </script>
 </body>
