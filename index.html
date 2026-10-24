@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#173d73">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="四级陪练">
+<title>CET-4 每日陪练</title>
+<style>
+:root{--blue:#173d73;--blue2:#2c5f9d;--bg:#f3f6fb;--ink:#17263c;--muted:#68778d;--line:#e0e7f0;--green:#16845b;--card:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",Arial,sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{background:linear-gradient(135deg,var(--blue),#2d5e98);color:#fff;padding:22px 18px 20px;border-radius:0 0 24px 24px}
+.kicker{font-size:12px;opacity:.8;letter-spacing:.08em}.headrow{display:flex;align-items:center;justify-content:space-between;gap:12px}h1{font-size:24px;margin:7px 0 4px}.sub{font-size:13px;opacity:.85}.pill{border:1px solid #ffffff70;padding:7px 10px;border-radius:99px;font-size:12px;white-space:nowrap}
+main{max-width:760px;margin:auto;padding:14px 14px 28px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:-2px}.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:15px;box-shadow:0 3px 12px #1b3b6410}.label{color:var(--muted);font-size:12px}.big{font-size:25px;font-weight:750;margin:5px 0}.small{font-size:12px;color:var(--muted)}.progress{height:8px;border-radius:99px;background:#e8edf4;overflow:hidden;margin-top:10px}.bar{height:100%;background:var(--green);width:0%;transition:width .2s}
+.sectiontitle{font-size:17px;font-weight:750;margin:21px 2px 10px}.card{margin-bottom:10px}.tasktop{display:flex;gap:11px;align-items:flex-start}.check{appearance:none;width:23px;height:23px;border:2px solid #aab8ca;border-radius:7px;flex:0 0 23px;margin:1px 0 0;cursor:pointer}.check:checked{background:var(--green);border-color:var(--green)}.check:checked:after{content:"✓";color:#fff;display:block;text-align:center;font-weight:800;line-height:19px}.taskname{font-weight:750;font-size:15px}.duration{margin-left:auto;background:#edf3fa;color:var(--blue);font-size:12px;border-radius:7px;padding:4px 7px;white-space:nowrap}.detail{font-size:13px;color:#4e5d72;line-height:1.6;margin:8px 0 0 34px}.links{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0 34px}.links a,.btn{font-size:12px;text-decoration:none;border:1px solid #d4dfed;border-radius:9px;padding:8px 10px;color:var(--blue);background:#f8fbff}.meta{font-size:12px;color:var(--muted);line-height:1.55}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.btn{cursor:pointer;font-size:13px}.primary{background:var(--blue);color:#fff;border-color:var(--blue)}textarea{width:100%;min-height:88px;border:1px solid var(--line);border-radius:12px;padding:11px;font:14px inherit;resize:vertical;background:#fbfcfe;color:var(--ink)}.fieldlabel{display:block;font-size:13px;font-weight:700;margin:10px 0 6px}.foot{font-size:11px;color:var(--muted);line-height:1.6;padding:10px 3px}.notice{background:#fff8e7;border:1px solid #f0dfa9;color:#715522;padding:11px 12px;border-radius:12px;font-size:12px;line-height:1.6;margin-top:12px}.hidden{display:none}@media(min-width:620px){main{padding-left:22px;padding-right:22px}.tasksgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tasksgrid .card{margin-bottom:0}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">YOUR PERSONAL CET-4 COACH</div>
+  <div class="headrow"><div><h1>四级每日陪练</h1><div class="sub">目标 425+ · 词汇 / 听力 / 阅读 / 写作翻译</div></div><div class="pill" id="dayPill">Day 1</div></div>
+</header>
+<main>
+  <div class="stats">
+    <div class="stat"><div class="label">今日完成</div><div class="big"><span id="doneCount">0</span><span style="font-size:14px;color:var(--muted)"> / 5 项</span></div><div class="progress"><div class="bar" id="progressBar"></div></div></div>
+    <div class="stat"><div class="label">今日学习目标</div><div class="big">150 <span style="font-size:14px">分钟</span></div><div class="small" id="dateText">今日任务</div></div>
+  </div>
+  <div class="notice"><b>使用提示：</b>每天打开此页面会按日期更新当天任务。打卡和复盘记录保存在这台设备的浏览器中；清除网站数据或换设备可能会丢失。</div>
+  <div class="sectiontitle">今日任务清单</div>
+  <div class="tasksgrid" id="tasks"></div>
+  <div class="sectiontitle">免费资料入口</div>
+  <div class="card">
+    <div class="taskname">① 四级历年真题、答案与部分听力音频</div>
+    <p class="meta">优先选择答案、原文和音频齐全的套卷。练习前先确认文件能打开，不确定题号时不要猜。</p>
+    <div class="links"><a href="https://github.com/0609x/CET46-Resources" target="_blank" rel="noopener">打开真题仓库 ↗</a></div>
+  </div>
+  <div class="card">
+    <div class="taskname">② 四级高频词汇 PDF</div>
+    <p class="meta">每天学约 25 个新词，配合间隔复习；优先掌握真题中反复出现的词和搭配。</p>
+    <div class="links"><a href="https://github.com/liut969/CET" target="_blank" rel="noopener">打开高频词汇 ↗</a></div>
+  </div>
+  <div class="card">
+    <div class="taskname">③ 官方考试信息</div>
+    <p class="meta">考试安排、题型等信息以中国教育考试网及学校通知为准。</p>
+    <div class="links"><a href="https://cet.neea.edu.cn/" target="_blank" rel="noopener">中国教育考试网 ↗</a></div>
+  </div>
+  <div class="sectiontitle">每日复盘</div>
+  <div class="card">
+    <label class="fieldlabel" for="listening">听力：正确题数 / 总题数，最主要的漏听原因</label><textarea id="listening" placeholder="例：6/10；有些词认识但听不出来……"></textarea>
+    <label class="fieldlabel" for="reading">阅读：正确题数 / 总题数，用时和错因</label><textarea id="reading" placeholder="例：4/5；耗时 12 分钟；两题是同义替换没认出……"></textarea>
+    <label class="fieldlabel" for="words">词汇：今天掌握了什么，哪些仍不熟</label><textarea id="words" placeholder="例：25 个新词中 18 个能回忆……"></textarea>
+    <label class="fieldlabel" for="notes">给陪练的备注 / 明天想重点练什么</label><textarea id="notes" placeholder="写下卡住的问题；回到 ChatGPT 对话中粘贴复盘内容，让我调整明日计划。"></textarea>
+    <div class="row" style="margin-top:12px;flex-wrap:wrap"><button class="btn" id="saveBtn">保存今日记录</button><button class="btn" id="copyBtn">复制复盘内容</button><button class="btn" id="resetBtn">重置今日打卡</button></div>
+    <p class="meta" id="saveStatus" aria-live="polite"></p>
+  </div>
+  <div class="sectiontitle">自动更新说明</div>
+  <div class="card meta">
+    <p><b>会自动更新：</b>页面按设备本地日期显示日期和 Day 编号；任务内容会按备考阶段轮换（基础诊断、听力阅读强化、写作翻译、模拟与考前复习）。</p>
+    <p><b>不会自动同步：</b>本页面不会直接读取 ChatGPT 对话，也不会把你在聊天中收到的新计划自动同步到这里。打卡和记录只保存在当前设备浏览器。</p>
+    <p><b>考试日期提醒：</b>计划阶段按 2026 年 12 月 12 日作为目标日期设置；请以官方和学校最新通知为准。</p>
+  </div>
+  <div class="foot">建议：将页面部署到 HTTPS 静态网站后，在 iPhone/iPad 的 Safari 中打开 → 分享 → 添加到主屏幕。此文件本身不会自动变成原生 iOS 小组件，也不能在未部署时从本地文件保证主屏幕持续刷新。</div>
+</main>
+<script>
+const START = new Date(2026,9,24); // local calendar date
+const EXAM = new Date(2026,11,12);
+const baseTasks = [
+ {id:"vocab",name:"A｜高频词汇与间隔复习",min:30,detail:"从免费高频词表学习约 25 个新词。每个词读音、词义、搭配都过一遍；再复习前 1、3、7 天标记的旧词。最后遮住中文自测。"},
+ {id:"listen",name:"B｜四级听力精练",min:35,detail:"选一套音频、答案和原文齐全的真题，做一个完整小节。第一遍盲听答题；第二遍核对；对照原文找出 3 句漏听句；逐句跟读后再听。记录正确题数。"},
+ {id:"read",name:"C｜阅读专项限时练习",min:35,detail:"完成一篇仔细阅读；先独立计时作答，再核对答案。每道错题标记：词汇、长句、定位、同义替换或干扰项。"},
+ {id:"write",name:"D｜写作 / 翻译轮换",min:20,detail:"奇数日写 5–8 句或一个短段落；偶数日翻译 4–6 句。重点检查主谓一致、时态、词形、拼写和句子完整性。"},
+ {id:"review",name:"E｜复盘与小测",min:30,detail:"重测今天的新词；重新听错的句子；不看答案重做阅读错题。记录最常见的 1–2 个问题，发回 ChatGPT 让陪练调整明日计划。"}
+];
+const stages = [
+ {end:7,name:"基础诊断",change:"先建立正确率基线；不要为了做题量牺牲精听和复盘。"},
+ {end:21,name:"听力阅读强化",change:"继续词汇积累，提高精听、跟读与限时阅读比例。"},
+ {end:35,name:"专项提分",change:"保持听读，增加写作和翻译的限时产出。"},
+ {end:42,name:"模拟与纠错",change:"至少完成一套完整限时真题，重点复盘可避免的错误。"},
+ {end:60,name:"考前巩固",change:"以真题错题、高频词和熟悉题型为主，避免大量换新资料。"}
+];
+function localKey(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function dayNum(){const today=new Date();const a=new Date(today.getFullYear(),today.getMonth(),today.getDate());return Math.max(1,Math.floor((a-START)/86400000)+1)}
+function stageFor(n){return stages.find(s=>n<=s.end)||stages[stages.length-1]}
+function currentTasks(n){
+ let ts=baseTasks.map(t=>({...t}));
+ const stage=stageFor(n);
+ if(n%2===0){ts.find(t=>t.id==="write").detail="翻译日：从真题翻译部分选 4–6 句，先独立翻译，再对照参考译文，整理 3 个可复用表达。";}
+ else {ts.find(t=>t.id==="write").detail="写作日：围绕学习、科技、健康或校园生活写一个短段落，检查主谓一致、时态、拼写和句子完整性。";}
+ if(n%3===0){ts.find(t=>t.id==="read").detail="长篇匹配日：限时完成一组段落信息匹配，圈出题干关键词和段落同义替换；做完后再补一篇仔细阅读中的错题复盘。";}
+ if(n%5===0){ts.find(t=>t.id==="listen").detail="听力复测日：先完成一段未做过的真题，再回听前几天最难的 3 句。记录盲听正确题数，比较是否进步。";}
+ if(stage.name==="模拟与纠错"){ts.find(t=>t.id==="review").detail="模拟复盘：把最近一次限时练习按题型统计，优先重做可避免的错题；若本周尚未做整套真题，今天安排完整计时。";}
+ if(stage.name==="考前巩固"){ts.find(t=>t.id==="vocab").detail="考前复习：不大量增加新词，优先复习错词本、高频搭配和最近真题中的生词。";}
+ return {ts,stage};
+}
+const dateKey=localKey(new Date()); const n=dayNum(); const {ts,stage}=currentTasks(n);
+document.getElementById("dayPill").textContent="Day "+n;
+document.getElementById("dateText").textContent=new Date().toLocaleDateString("zh-CN",{month:"long",day:"numeric",weekday:"short"})+" · "+stage.name;
+const tasksEl=document.getElementById("tasks");
+function key(s){return "cet4:"+dateKey+":"+s}
+function render(){
+ tasksEl.innerHTML="";
+ ts.forEach(t=>{
+  const card=document.createElement("div");card.className="card";
+  const top=document.createElement("div");top.className="tasktop";
+  const check=document.createElement("input");check.type="checkbox";check.className="check";check.checked=localStorage.getItem(key("done:"+t.id))==="1";check.setAttribute("aria-label","完成 "+t.name);
+  check.addEventListener("change",()=>{localStorage.setItem(key("done:"+t.id),check.checked?"1":"0");updateProgress()});
+  const content=document.createElement("div");content.style.flex="1";
+  const title=document.createElement("div");title.className="taskname";title.textContent=t.name;
+  content.appendChild(title);top.append(check,content);
+  const dur=document.createElement("span");dur.className="duration";dur.textContent=t.min+" 分钟";top.appendChild(dur);
+  const detail=document.createElement("div");detail.className="detail";detail.textContent=t.detail;
+  card.append(top,detail);
+  if(t.id==="listen"||t.id==="read"||t.id==="vocab"){
+   const links=document.createElement("div");links.className="links";
+   const a=document.createElement("a");a.href=t.id==="vocab"?"https://github.com/liut969/CET":"https://github.com/0609x/CET46-Resources";a.target="_blank";a.rel="noopener";a.textContent=t.id==="vocab"?"打开高频词表 ↗":"打开真题仓库 ↗";links.appendChild(a);card.appendChild(links);
+  }
+  tasksEl.appendChild(card);
+ });
+ updateProgress();
+}
+function updateProgress(){let count=ts.filter(t=>localStorage.getItem(key("done:"+t.id))==="1").length;document.getElementById("doneCount").textContent=count;document.getElementById("progressBar").style.width=(count/ts.length*100)+"%";}
+const fields=["listening","reading","words","notes"];
+function loadNotes(){fields.forEach(id=>document.getElementById(id).value=localStorage.getItem(key("note:"+id))||"");}
+function saveNotes(){fields.forEach(id=>localStorage.setItem(key("note:"+id),document.getElementById(id).value));document.getElementById("saveStatus").textContent="已保存到本设备："+dateKey+"（仅此浏览器）";}
+document.getElementById("saveBtn").addEventListener("click",saveNotes);
+document.getElementById("copyBtn").addEventListener("click",async()=>{saveNotes();const textOut="四级陪练复盘｜"+dateKey+"\n完成任务："+ts.filter(t=>localStorage.getItem(key("done:"+t.id))==="1").map(t=>t.name).join("、")+"\n听力："+document.getElementById("listening").value+"\n阅读："+document.getElementById("reading").value+"\n词汇："+document.getElementById("words").value+"\n备注："+document.getElementById("notes").value;try{await navigator.clipboard.writeText(textOut);document.getElementById("saveStatus").textContent="复盘已复制，可粘贴到 ChatGPT 对话。"}catch(e){document.getElementById("saveStatus").textContent=textOut;}});
+document.getElementById("resetBtn").addEventListener("click",()=>{if(confirm("确定重置今天的 5 项打卡吗？复盘文字不会删除。")){ts.forEach(t=>localStorage.removeItem(key("done:"+t.id)));render();}});
+render();loadNotes();
+</script>
+</body>
+</html>
